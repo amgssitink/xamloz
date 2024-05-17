@@ -5,7 +5,7 @@ local win = lib:Window("Test",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightCo
 local tab = win:Tab("Tab 1")
 
 tab:Toggle("Ken",true, function(t)
-_G.AUTOKen = true
+_G.AUTOKen = Value
 end)
 
 spawn(function()

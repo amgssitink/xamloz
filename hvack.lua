@@ -24,3 +24,17 @@ spawn(function()
             end)
         end
     end)
+    
+tab:Toggle("V3",true, function(t)
+_G.AutoT = Value
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoT then
+                game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("ActivateAbility")
+            end
+        end)
+    end
+    end)

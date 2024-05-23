@@ -2057,7 +2057,7 @@ function FastAttackConnectorFunction()
                                 getupvalues(
                                 require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
                             )[2]
-                            bd.activeController.hitboxMagnitude = 500
+                            bd.activeController.hitboxMagnitude = 55
                             local bc = game:GetService("VirtualUser")
                             bc:CaptureController()
                             bc:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
@@ -2110,7 +2110,7 @@ spawn(function()
 					CameraShaker:Stop()
 					y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
 					y.activeController.timeToNextAttack = 0
-					y.activeController.hitboxMagnitude = 500
+					y.activeController.hitboxMagnitude = 60
 					y.activeController.active = false
 					y.activeController.timeToNextBlock = 0
 					y.activeController.focusStart = 1655503339.0980349

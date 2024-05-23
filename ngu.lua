@@ -1649,7 +1649,7 @@ A:AddDropdown({Name = "Select Skill [Click Skill Enable]", Default = "", Options
             table.insert(RealSkillSelected, r)
         end
     end
-    Notify("Hirimi Hub", "Skill " .. tostring(vSelectSkills) .. ": " .. tostring(SkillSelected[vSelectSkills]) .. "")
+    Notify("Apsara Hub", "Skill " .. tostring(vSelectSkills) .. ": " .. tostring(SkillSelected[vSelectSkills]) .. "")
 end    
 })
 B:AddSlider({Name = "Stop Health Mastery", Min = 0, Max = 100, Default = 40, Color = Color3.fromRGB(255,255,255), Increment = 1, ValueName = "%", Callback = function(vHealthm)
@@ -1997,7 +1997,7 @@ function FastAttackConnectorFunction()
     function ReturnFunctions:Attack(k)
         UFFF = k
     end
-    FastAttackSettings = {["CDAAT"] = 0, ["TimeWait"] = 0}
+    FastAttackSettings = {["CDAAT"] = 0, ["TimeWait"] = 1}
     spawn(
         function()
             local aV = require(game.ReplicatedStorage.Util.CameraShaker)
@@ -2030,7 +2030,7 @@ function FastAttackConnectorFunction()
                                 ToiCanOxi = ToiCanOxi + 1
                                 AttackFunctgggggion()
                                 if h and h["DelayAttack"] then
-                                    wait(h["DelayAttack"] * 0)
+                                    wait(h["DelayAttack"] * 2)
                                 end
                             end
                         end
@@ -2091,6 +2091,19 @@ function Click()
     bc:CaptureController()
     bc:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
 end
+spawn(
+    function()
+        while wait() do
+            if UseFastAttack or h["Attack No CD Aura"] then
+                FastAttackConnector:InputSetting(h)
+                FastAttackConnector:InputValue(h["CDAAT"], h["TimeWait"])
+                FastAttackConnector:Attack(true)
+            else
+                FastAttackConnector:Attack(false)
+            end
+        end
+    end
+)
 local fast = B:AddToggle({Name = "Enable Fast Attack", Default = true, Callback = function(vFastAttack)
     _G.FastAttack = FastAttack
 end    

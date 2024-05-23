@@ -1271,10 +1271,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
         end
     end
 end)
-A:AddToggle({Name = "Bypass Teleport", Default = true, Callback = function(vBTP)
-    BypassTP = vBTP
-end    
-}) 
 A:AddSection({Name = "Farm Mode"})
 local Selectmodef = A:AddDropdown({Name = "Select Mode Farm", Default = "", Options = {"Level", "Bone", "Cake Prince"}, Callback = function(vSFarm)
     SelectFarm = vSFarm
@@ -2127,6 +2123,14 @@ spawn(function()
 		end
 	end)
 end)
+B:AddToggle({Name = "Bypass Teleport", Default = true, Callback = function(vBTP)
+    BypassTP = vBTP
+end    
+})
+B:AddToggle({Name = "Bring Mobs", Default = true, Callback = function(vBM)
+    BringMob = vBM
+end    
+}) 
 C:AddDropdown({Name = "Select Microchip Raid", Default = "", Options = ListChip, Callback = function(vSelectRaid)
     SelectRaid = vSelectRaid
 end    

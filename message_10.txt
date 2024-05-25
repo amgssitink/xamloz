@@ -366,7 +366,7 @@ function Update:Window(text,logo,keybind)
     Ping.Position = UDim2.new(0.28, 0,0.074, 0)
     Ping.Size = UDim2.new(0, 225, 0, 25)
     Ping.Font = Enum.Font.GothamSemibold
-    Ping.Text = "Blox Fruit | discord.gg/Dg5nr8CrVV          [RightControl]"
+    Ping.Text = "Blox Fruit | Beta Ver          "
     Ping.TextColor3 = Color3.fromRGB(255,255,255)
     Ping.TextSize = 14.000
     Ping.TextXAlignment = Enum.TextXAlignment.Left
@@ -3947,75 +3947,48 @@ spawn(function()
     end
 end)
 
-local SuperFastMode = true
-
-local plr = game.Players.LocalPlayer
-
-local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
-local CbFw2 = CbFw[2]
-
-function GetCurrentBlade() 
-    local p13 = CbFw2.activeController
-    local ret = p13.blades[1]
-    if not ret then return end
-    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
-    return ret
+function GetBladeHit()
+local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+local CmrFwLib = CombatFrameworkLib[2]
+local p13 = CmrFwLib.activeController
+local weapon = p13.blades[1]
+if not weapon then 
+    return weapon
 end
-function AttackNoCD() 
-    local AC = CbFw2.activeController
-    for i = 1, 1 do 
-        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
-            plr.Character,
-            {plr.Character.HumanoidRootPart},
-            60
-        )
-        local cac = {}
-        local hash = {}
-        for k, v in pairs(bladehit) do
-            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
-                table.insert(cac, v.Parent.HumanoidRootPart)
-                hash[v.Parent] = true
-            end
-        end
-        bladehit = cac
-        if #bladehit > 0 then
-            local u8 = debug.getupvalue(AC.attack, 5)
-            local u9 = debug.getupvalue(AC.attack, 6)
-            local u7 = debug.getupvalue(AC.attack, 4)
-            local u10 = debug.getupvalue(AC.attack, 7)
-            local u12 = (u8 * 798405 + u7 * 727595) % u9
-            local u13 = u7 * 798405
-            (function()
-                u12 = (u12 * u9 + u13) % 1099511627776
-                u8 = math.floor(u12 / u9)
-                u7 = u12 - u8 * u9
-            end)()
-            u10 = u10 + 1
-            debug.setupvalue(AC.attack, 5, u8)
-            debug.setupvalue(AC.attack, 6, u9)
-            debug.setupvalue(AC.attack, 4, u7)
-            debug.setupvalue(AC.attack, 7, u10)
-            pcall(function()
-                for k, v in pairs(AC.animator.anims.basic) do
-                    v:Play()
-                end                  
-            end)
-            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
-                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
-            end
+while weapon.Parent ~= game.Players.LocalPlayer.Character do
+    weapon = weapon.Parent 
+end
+return weapon
+end
+function AttackHit()
+local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+local CmrFwLib = CombatFrameworkLib[2]
+local plr = game.Players.LocalPlayer
+for i = 1, 1 do
+    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
+    local cac = {}
+    local hash = {}
+    for k, v in pairs(bladehit) do
+        if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+            table.insert(cac, v.Parent.HumanoidRootPart)
+            hash[v.Parent] = true
         end
     end
+    bladehit = cac
+    if #bladehit > 0 then
+        pcall(function()
+            CmrFwLib.activeController.timeToNextAttack = 0
+            CmrFwLib.activeController.attacking = false
+            CmrFwLib.activeController.blocking = false
+            CmrFwLib.activeController.timeToNextBlock = 0
+            CmrFwLib.activeController.increment = 1 + 1 + math.huge
+            CmrFwLib.activeController.hitboxMagnitude = 200
+            CmrFwLib.activeController.focusStart = 0
+            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
+            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
+        end)
+    end
 end
-local cac
-if SuperFastMode then 
-	cac=task.wait
-else
-	cac=wait
-end
-while cac() do 
-	AttackNoCD()
 end
 
 
@@ -14532,7 +14505,7 @@ end)
         end
     end)
     
-    Misc:AddButton("Remove Lave",function()
+    Misc:AddButton("Remove Lava",function()
 		for i,v in pairs(game.Workspace:GetDescendants()) do
 			if v.Name == "Lava" then   
 				v:Destroy()

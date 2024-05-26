@@ -1,4 +1,6 @@
         local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/amgssitink/Uifluchjm/main/blade_main.lua"))()
+        local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/amgssitink/Uifluchjm/main/BladeSaveManager.lua"))()
+        local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/amgssitink/Uifluchjm/main/BladeInterfaceManager.lua"))()
         repeat
             task.wait()
         until game:IsLoaded() and game.Players and game.Players.LocalPlayer
@@ -8902,7 +8904,7 @@
         loadstring(game:HttpGet("https://raw.githubusercontent.com/memaybeohub/Function-Scripts/main/FastAttackLoader.lua"))()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/amgssitink/xamloz/main/fastattackdom.lua"))()
         -- Final Load --
-        LoadedUiHub = true
+        LoadedUiHub = false
         Window:SelectTab(1)
         Fluent:Notify(
             {

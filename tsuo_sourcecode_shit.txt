@@ -37,7 +37,7 @@ function instance.new(class, properties)
     table.insert(instance.obj, inst)
     return inst
 end
-l
+
         local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
         repeat
             task.wait()

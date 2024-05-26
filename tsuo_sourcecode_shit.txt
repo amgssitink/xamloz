@@ -214,7 +214,7 @@
                 Title = "Apsara Hub",
                 SubTitle = "Blox Fruits",
                 TabWidth = 160,
-                Size = UDim2.fromOffset(Size100, Size101),
+                Size = UDim2.fromOffset(Size10, Size11),
                 Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
                 Theme = "Ocean",
                 MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
@@ -328,7 +328,7 @@
             function newmm:NewDropdown(title, cf)
                 DefaultConfigDropdown = {
                     Title = "Drodown",
-                    Values = {"MMB", "TSUO"},
+                    Values = {"MMB", "Apsara"},
                     Multi = false,
                     Default = nil
                 }
@@ -445,7 +445,7 @@
         end 
         SettingTab = Window:NewTab({Title = "Setting",Icon = getRandomIcon()})
         function CreateUiNotify(cf)
-            newtitle = cf.Title or "Tsuo Hub"
+            newtitle = cf.Title or "Apsara Hub"
             newcontent = cf.Content or "Nothing"
             newduration = cf.Duration or 10
             newsubcontent = cf.SubContent or ""

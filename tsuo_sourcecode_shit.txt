@@ -1,6 +1,32 @@
-        local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/amgssitink/Uifluchjm/main/blade_main.lua"))()
-        local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/amgssitink/Uifluchjm/main/BladeSaveManager.lua"))()
-        local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/amgssitink/Uifluchjm/main/BladeInterfaceManager.lua"))()
+-- tsuo hub deob...
+
+
+
+if getgenv().ScriptExecute then return print('Script Already Execute') end
+local start_check_time = tick()
+getgenv().ScriptExecute = true
+repeat task.wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer  
+if game.CoreGui:FindFirstChild("Mo Mo Be") then
+    game.CoreGui:FindFirstChild("Mo Mo Be"):Destroy()
+end  
+if islclosure(getgenv().setfenv) then game.Players.LocalPlayer:Kick("MMB 1") while true do end end -- ANTI SETFENV TAMPERING
+if islclosure(getgenv().tostring) then game.Players.LocalPlayer:Kick("MMB 2") while true do end end -- ANTI TOSTRING TAMPERING
+getgenv().clonefunction = nil
+getgenv().clonefunc = nil
+local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/x9PSwiftz/Panda/main/Notification.lua"))() 
+local instance = {obj = {}}
+local object = instance.obj
+local HubName = "Tsuo Hub"
+function instance.new(class, properties)
+    local inst = Instance.new(class)
+    for property, value in next, properties do
+        inst[property] = value
+    end
+    table.insert(instance.obj, inst)
+    return inst
+end
+
+        local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
         repeat
             task.wait()
         until game:IsLoaded() and game.Players and game.Players.LocalPlayer
@@ -10,7 +36,7 @@
         end
         --- Hub Values ---
         Hub = {}
-        Hub.Name = "Apsara Hub"
+        Hub.Name = "Tsuo Hub"
         Hub.Game = "Blox Fruits"
         ---- Settings -----
         HttpService = game:GetService("HttpService")
@@ -98,8 +124,17 @@
         end
         ------------------
         RandomText = {
-            "Don't Hack So Much!",
-            "U Need To Touch Grass",
+            "The Simulation is who we really are?",
+            "It fantasy",
+            "Live for your life",
+            "Cause i never surrender",
+            "their reflection in your eyes",
+            "make me wanna sacrifice",
+            "Wont end it, this fantasy",
+            "Love it",
+            "I'll waitting, waitting",
+            "and if ever feel lonely, come see me",
+            "Cause i Need someone to belive in love"
         }
         randomtexte = RandomText[math.random(1, #RandomText)]
         ------- Joining Team ---- 
@@ -191,7 +226,7 @@
             ImageLabel.BorderSizePixel = 0
             ImageLabel.Position = UDim2.new(0.48888889, 0, 0.48888889, 0)
             ImageLabel.Size = UDim2.new(0, 45, 0, 45)
-            ImageLabel.Image = "rbxassetid://17556296872"
+            ImageLabel.Image = "rbxassetid://15241946029"
             
             TextButton.Parent = MainFrame
             TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -213,12 +248,12 @@
         local Window =
             Fluent:CreateWindow(
             {
-                Title = "Apsara Hub",
-                SubTitle = "Blox Fruits",
+                Title = "Tsuo Hub Update 20",
+                SubTitle = "Dev By VMH09",
                 TabWidth = 160,
-                Size = UDim2.fromOffset(Size10, Size11),
+                Size = UDim2.fromOffset(Size11, Size22),
                 Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
-                Theme = "Ocean",
+                Theme = "Darker",
                 MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
             }
         )
@@ -228,7 +263,7 @@
             domain = newmm
             function newmm:NewParagraph(cf)
                 local paragraphnew
-                newTitle = cf.Title or "Apsara Hub"
+                newTitle = cf.Title or "Tsuo Hub"
                 newContent = cf.Content or "MMB"
                 paragraphnew =
                     domain:AddParagraph(
@@ -238,7 +273,7 @@
                     }
                 )
                 function paragraphnew:Set(cf2)
-                    newTitle = cf2.Title or "Apsara Hub"
+                    newTitle = cf2.Title or "Tsuo Hub"
                     newContent = cf2.Content or "MMB"
                     paragraphnew:SetTitle(newTitle)
                     paragraphnew:SetDesc(newContent)
@@ -330,7 +365,7 @@
             function newmm:NewDropdown(title, cf)
                 DefaultConfigDropdown = {
                     Title = "Drodown",
-                    Values = {"MMB", "Apsara"},
+                    Values = {"MMB", "TSUO"},
                     Multi = false,
                     Default = nil
                 }
@@ -447,7 +482,7 @@
         end 
         SettingTab = Window:NewTab({Title = "Setting",Icon = getRandomIcon()})
         function CreateUiNotify(cf)
-            newtitle = cf.Title or "Apsara Hub"
+            newtitle = cf.Title or "Tsuo Hub"
             newcontent = cf.Content or "Nothing"
             newduration = cf.Duration or 10
             newsubcontent = cf.SubContent or ""
@@ -8902,13 +8937,12 @@
         ------ Attack Functions ---------
         
         loadstring(game:HttpGet("https://raw.githubusercontent.com/memaybeohub/Function-Scripts/main/FastAttackLoader.lua"))()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/amgssitink/xamloz/main/fastattackdom.lua"))()
         -- Final Load --
-        LoadedUiHub = false
+        LoadedUiHub = true
         Window:SelectTab(1)
         Fluent:Notify(
             {
-                Title = "Apsara Hub",
+                Title = "Tsuo Hub",
                 Content = "The script has been loaded successful.",
                 Duration = 15
             }

@@ -2287,7 +2287,7 @@ local Window = OrionLib:MakeWindow({Name = "Apsara Hub", HidePremium = false, In
 
 OrionLib:MakeNotification({
 	Name = "Apsara Hub",
-	Content = "Hello "@"..game.Players.LocalPlayer.Name..""",
+	Content = "Hello",
 	Image = "getRandomIcon",
 	Time = 25
 })

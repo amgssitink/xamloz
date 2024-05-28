@@ -3865,7 +3865,7 @@ function AttackHit()
         bladehit = cac
         if #bladehit > 0 then
             pcall(function()
-                CmrFwLib.activeController.timeToNextAttack = 1
+                CmrFwLib.activeController.timeToNextAttack = 0
                 CmrFwLib.activeController.attacking = false
                 CmrFwLib.activeController.blocking = false
                 CmrFwLib.activeController.timeToNextBlock = 0
@@ -3879,7 +3879,7 @@ function AttackHit()
     end
 end
 spawn(function()
-    while wait(.0) do
+    while wait(.0000000000000000000000000000000000000000000000000000000000000000001) do
         if _G.FastAttack then
             pcall(function()
                 repeat task.wait(_G.FastAttackDelay)
@@ -4324,7 +4324,7 @@ function AttackHit()
         bladehit = cac
         if #bladehit > 0 then
             pcall(function()
-                CmrFwLib.activeController.timeToNextAttack = 1
+                CmrFwLib.activeController.timeToNextAttack = 0
                 CmrFwLib.activeController.attacking = false
                 CmrFwLib.activeController.blocking = false
                 CmrFwLib.activeController.timeToNextBlock = 0
@@ -4338,7 +4338,7 @@ function AttackHit()
     end
 end
 spawn(function()
-    while wait(.0) do
+    while wait(.0000000000000000000000000000000000000000000000000000000000000000001) do
         if _G.FastAttack then
             pcall(function()
                 repeat task.wait(_G.FastAttackDelay)

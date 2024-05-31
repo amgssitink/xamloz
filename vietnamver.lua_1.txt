@@ -7874,7 +7874,7 @@ function FastAttackConnectorFunction()
     end
     FastAttackSettings = {
         ["CDAAT"] = 0,
-        ["TimeWait"] = 1
+        ["TimeWait"] = 0
     }
     spawn(function()
         local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
@@ -7895,7 +7895,7 @@ function FastAttackConnectorFunction()
     ToiCanOxi = 0
     conchosetting = {}
     function ReturnFunctions:GetMethod()
-        MethodAttack = "Slow"
+        MethodAttack = "Fast"
         if CountAttack < FastAttackSettings["CDAAT"] then 
             MethodAttack = "Fast"
         end 

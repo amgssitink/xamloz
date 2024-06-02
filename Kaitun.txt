@@ -2275,14 +2275,14 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({Name = "Apsara Hub", HidePremium = false, IntroText = "Apsara Library Cominiunty", SaveConfig = true, ConfigFolder = "Apsara Hub"})
 
 OrionLib:MakeNotification({
-	Name = "Night Hub",
+	Name = "Apsara Hub",
 	Content = "Hello",
 	Image = "rbxassetid://4483345998",
 	Time = 7
 })
 
 OrionLib:MakeNotification({
-    Name = "Night Hub",
+    Name = "Apsara Hub",
     Content = "Please Wait loading script",
     Image = "rbxassetid://4483345998",
     Time = 5
@@ -2292,6 +2292,12 @@ OrionLib:MakeNotification({
 
 local W = Window:MakeTab({
     Name = "Information Tabs",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local SH = Window:MakeTab({
+    Name = "Shop Tabs",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
@@ -2358,12 +2364,6 @@ local D = Window:MakeTab({
 
 local R = Window:MakeTab({
     Name = "Race V4 Tabs",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-local SH = Window:MakeTab({
-    Name = "Shop Tabs",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
@@ -2479,7 +2479,7 @@ local Section = W:AddSection({
     Name = "Status Hack"
 })
 
-local LevelFarmFarm W:AddLabel("Kaitun : Will Learn Soom)")
+local LevelFarmFarm W:AddLabel("Kaitun : Will Learn Soon")
 W:AddLabel("Config Save : Already Have")
 local Farmfast = W:AddLabel("Farm Fast : ❌")
 local Bypass = W:AddLabel("Bypass ❌")
@@ -2581,6 +2581,322 @@ spawn(function()
         end)
     end
 end)
+
+local Section = SH:AddSection({
+    Name = "Melee"
+})
+
+SH:AddButton({
+    Name = "Black Leg",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
+      end    
+})
+
+SH:AddButton({
+    Name = "Electrol",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+      end    
+})
+
+SH:AddButton({
+    Name = "FishMan Karate",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+      end    
+})
+
+SH:AddButton({
+    Name = "Dragon Claw",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
+      end    
+})
+
+SH:AddButton({
+    Name = "SuperHuman",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+      end    
+})
+
+
+SH:AddButton({
+    Name = "Death Step",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
+      end    
+})
+
+SH:AddButton({
+    Name = "Electric Claw",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
+      end    
+})
+
+SH:AddButton({
+    Name = "SharkMan Karate",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate",true)
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
+      end    
+})
+
+SH:AddButton({
+    Name = "Dragon Talon",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
+      end    
+})
+
+SH:AddButton({
+    Name = "Godhuman",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
+      end    
+})
+
+SH:AddButton({
+    Name = "Sanguine Art",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineArt")
+      end    
+})
+
+local Section = SH:AddSection({
+    Name = "Haki :"
+})
+
+SH:AddButton({
+    Name = "Buy Buso Haki",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Buso")
+      end    
+})
+
+SH:AddButton({
+    Name = "Buy Geppo Haki",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Geppo")
+      end    
+})
+
+SH:AddButton({
+    Name = "Buy Flash Step(Soru)",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Soru")
+      end    
+})
+
+SH:AddButton({
+    Name = "Buy Observation(Ken) Haki",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk","Buy")
+      end    
+})
+
+
+
+local Section = SH:AddSection({
+    Name = "Race :"
+})
+
+SH:AddButton({
+    Name = "Buy Ghoul Race :",
+    Callback = function()
+        local a = {
+            [1] = "Ectoplasm",
+            [2] = "BuyCheck",
+            [3] = 4
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+        local a = {
+            [1] = "Ectoplasm",
+            [2] = "Change",
+            [3] = 4
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+      end    
+})
+
+SH:AddButton({
+    Name = "Buy Ghoul Race :",
+    Callback = function()
+        local a = {
+            [1] = "CyborgTrainer",
+            [2] = "Buy"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+      end    
+})
+
+local Section = SH:AddSection({
+    Name = "Other"
+})
+
+SH:AddButton({
+    Name = "Cutlass Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cutlass")
+      end    
+})
+
+SH:AddButton({
+    Name = "Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Katana")
+      end    
+})
+
+SH:AddButton({
+    Name = "Iron Mace",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Iron Mace")
+      end    
+})
+
+SH:AddButton({
+    Name = "Dual Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Duel Katana")
+      end    
+})
+
+SH:AddButton({
+    Name = "Triple Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Triple Katana")
+      end    
+})
+
+SH:AddButton({
+    Name = "Pipe",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Pipe")
+      end    
+})
+
+SH:AddButton({
+    Name = "Dual-Headed Blade ",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual-Headed Blade")
+      end    
+})
+
+SH:AddButton({
+    Name = "Bisento",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Bisento")
+      end    
+})
+
+SH:AddButton({
+    Name = "Soul Cane",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Soul Cane")
+      end    
+})
+
+SH:AddButton({
+    Name = "Pole v.2 [ 5,000 Fragments ]",
+    Callback = function()
+        game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ThunderGodTalk")
+      end    
+})
+
+local Section = SH:AddSection({
+    Name = "Gun"
+})
+
+SH:AddButton({
+    Name = "Slingshot",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Slingshot")
+      end    
+})
+
+SH:AddButton({
+    Name = "Musket",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Musket")
+      end    
+})
+
+SH:AddButton({
+    Name = "Flintlock",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Flintlock")
+      end    
+})
+
+SH:AddButton({
+    Name = "Refined Slingshot",
+    Callback = function()
+          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Refined Flintlock")
+      end    
+})
+
+SH:AddButton({
+    Name = "Refined Flintlock",
+    Callback = function()
+        local args = {
+            [1] = "BuyItem",
+            [2] = "Refined Flintlock"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+      end    
+})
+
+SH:AddButton({
+    Name = "Cannon",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cannon")
+      end    
+})
+
+SH:AddButton({
+    Name = "Kabucha [ 1,500 Fragments]",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","2")
+      end    
+})
+
+SH:AddButton({
+    Name = "Bizarre Rifle [ 250 Ectoplasm ]",
+    Callback = function()
+        local A_1 = "Ectoplasm"
+        local A_2 = "Buy"
+        local A_3 = 1
+        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+        Event:InvokeServer(A_1, A_2, A_3) 
+        local A_1 = "Ectoplasm"
+        local A_2 = "Buy"
+        local A_3 = 1
+        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+        Event:InvokeServer(A_1, A_2, A_3)
+      end    
+})
+
+SH:AddButton({
+    Name = "Refund Stats[2,500 fragment]",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
+      end    
+})
+
+SH:AddButton({
+    Name = "Race Random[3,000 fragment]",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
+      end    
+})
+
 local Section = M:AddSection({
     Name = "Select Weapon"
 })
@@ -2808,9 +3124,9 @@ Farmfasttoggle = M:AddToggle({
     end    
 })
 local Section = M:AddSection({
-    Name = "Kaitun - Bad"
+    Name = "Kaitun"
 })
-M:AddParagraph("Kaitun/Cuttay","This Feature Cuttay is bad, u dont use, and something hub")
+M:AddParagraph("Kaitun Not Work Now")
 M:AddToggle({
     Name = "Kaitun",
     Default = false,
@@ -2834,26 +3150,6 @@ M:AddToggle({
        StopTween(_G.Auto_Saber)
     end    
 })
-M:AddToggle({
-    Name = "Auto Click [Lag]",
-    Default = false,
-    Flag = "Auto Click",
-    Save = true,
-    Callback = function(Value)
-        _G.AutoClick = Value
-    end    
-})
-
-spawn(function()
-    game:GetService("RunService").RenderStepped:Connect(function()
-        if _G.AutoClick or Fastattack then
-             pcall(function()
-                game:GetService'VirtualUser':CaptureController()
-                game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,0,1))
-            end)
-        end
-    end)
-end)
 spawn(function()
     while wait() do
     if _G.RedeemCode then
@@ -3677,6 +3973,27 @@ spawn(function()
             end)
         end
     end
+end)
+
+M:AddToggle({
+    Name = "Auto Click [Can Get Kick]",
+    Default = false,
+    Flag = "Auto Click",
+    Save = true,
+    Callback = function(Value)
+        _G.AutoClick = Value
+    end    
+})
+
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.AutoClick or Fastattack then
+             pcall(function()
+                game:GetService'VirtualUser':CaptureController()
+                game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,0,1))
+            end)
+        end
+    end)
 end)
 
 ST:AddToggle({
@@ -5947,314 +6264,6 @@ R:AddToggle({
     end
 })
 
-local Section = SH:AddSection({
-    Name = "Melee"
-})
-
-SH:AddButton({
-    Name = "Black Leg",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
-      end    
-})
-
-SH:AddButton({
-    Name = "Electrol",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
-      end    
-})
-
-SH:AddButton({
-    Name = "FishMan Karate",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
-      end    
-})
-
-SH:AddButton({
-    Name = "Dragon Claw",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
-      end    
-})
-
-SH:AddButton({
-    Name = "SuperHuman",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
-      end    
-})
-
-
-SH:AddButton({
-    Name = "Death Step",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
-      end    
-})
-
-SH:AddButton({
-    Name = "Electric Claw",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
-      end    
-})
-
-SH:AddButton({
-    Name = "SharkMan Karate",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate",true)
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
-      end    
-})
-
-SH:AddButton({
-    Name = "Dragon Talon",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
-      end    
-})
-
-SH:AddButton({
-    Name = "Godhuman",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
-      end    
-})
-
-local Section = SH:AddSection({
-    Name = "Haki :"
-})
-
-SH:AddButton({
-    Name = "Buy Buso Haki",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Buso")
-      end    
-})
-
-SH:AddButton({
-    Name = "Buy Geppo Haki",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Geppo")
-      end    
-})
-
-SH:AddButton({
-    Name = "Buy Flash Step(Soru)",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Soru")
-      end    
-})
-
-SH:AddButton({
-    Name = "Buy Observation(Ken) Haki",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk","Buy")
-      end    
-})
-
-
-
-local Section = SH:AddSection({
-    Name = "Race :"
-})
-
-SH:AddButton({
-    Name = "Buy Ghoul Race :",
-    Callback = function()
-        local a = {
-            [1] = "Ectoplasm",
-            [2] = "BuyCheck",
-            [3] = 4
-        }
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
-        local a = {
-            [1] = "Ectoplasm",
-            [2] = "Change",
-            [3] = 4
-        }
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
-      end    
-})
-
-SH:AddButton({
-    Name = "Buy Ghoul Race :",
-    Callback = function()
-        local a = {
-            [1] = "CyborgTrainer",
-            [2] = "Buy"
-        }
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
-      end    
-})
-
-local Section = SH:AddSection({
-    Name = "Other"
-})
-
-SH:AddButton({
-    Name = "Cutlass Katana",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cutlass")
-      end    
-})
-
-SH:AddButton({
-    Name = "Katana",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Katana")
-      end    
-})
-
-SH:AddButton({
-    Name = "Iron Mace",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Iron Mace")
-      end    
-})
-
-SH:AddButton({
-    Name = "Dual Katana",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Duel Katana")
-      end    
-})
-
-SH:AddButton({
-    Name = "Triple Katana",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Triple Katana")
-      end    
-})
-
-SH:AddButton({
-    Name = "Pipe",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Pipe")
-      end    
-})
-
-SH:AddButton({
-    Name = "Dual-Headed Blade ",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual-Headed Blade")
-      end    
-})
-
-SH:AddButton({
-    Name = "Bisento",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Bisento")
-      end    
-})
-
-SH:AddButton({
-    Name = "Soul Cane",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Soul Cane")
-      end    
-})
-
-SH:AddButton({
-    Name = "Pole v.2 [ 5,000 Fragments ]",
-    Callback = function()
-        game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ThunderGodTalk")
-      end    
-})
-
-local Section = SH:AddSection({
-    Name = "Gun"
-})
-
-SH:AddButton({
-    Name = "Slingshot",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Slingshot")
-      end    
-})
-
-SH:AddButton({
-    Name = "Musket",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Musket")
-      end    
-})
-
-SH:AddButton({
-    Name = "Flintlock",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Flintlock")
-      end    
-})
-
-SH:AddButton({
-    Name = "Refined Slingshot",
-    Callback = function()
-          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Refined Flintlock")
-      end    
-})
-
-SH:AddButton({
-    Name = "Refined Flintlock",
-    Callback = function()
-        local args = {
-            [1] = "BuyItem",
-            [2] = "Refined Flintlock"
-        }
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-      end    
-})
-
-SH:AddButton({
-    Name = "Cannon",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cannon")
-      end    
-})
-
-SH:AddButton({
-    Name = "Kabucha [ 1,500 Fragments]",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","1")
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","2")
-      end    
-})
-
-SH:AddButton({
-    Name = "Bizarre Rifle [ 250 Ectoplasm ]",
-    Callback = function()
-        local A_1 = "Ectoplasm"
-        local A_2 = "Buy"
-        local A_3 = 1
-        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-        Event:InvokeServer(A_1, A_2, A_3) 
-        local A_1 = "Ectoplasm"
-        local A_2 = "Buy"
-        local A_3 = 1
-        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-        Event:InvokeServer(A_1, A_2, A_3)
-      end    
-})
-
-SH:AddButton({
-    Name = "Refund Stats[2,500 fragment]",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
-      end    
-})
-
-SH:AddButton({
-    Name = "Race Random[3,000 fragment]",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","1")
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
-      end    
-})
-
 local Section = C:AddSection({
     Name = "Open Tab"
 })
@@ -8241,17 +8250,11 @@ pcall(function()
         if _G.AutoEliteHunter then
             if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                 OrionLib:MakeNotification({
-                    Name = "Night Hub(Noitification)",
-                    Content = "[EN] : Please cancel the farrm level quest (if any)",
+                    Name = "Apsara Hub(Noitification)",
+                    Content = "Please cancel the farrm level quest",
                     Image = "rbxassetid://4483345998",
                     Time = 9
-                })
-                OrionLib:MakeNotification({
-                    Name = "Night Hub(Noitification)",
-                    Content = "[VN] : Làm ơn hủy nhiệm vụ farrm level(nếu có)",
-                    Image = "rbxassetid://4483345998",
-                    Time = 9
-                })
+                })                
             end
         end
     end
@@ -8417,8 +8420,8 @@ spawn(function()
             if _G.AutoObservation then
                 if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
                     OrionLib:MakeNotification({
-                        Name = "NIGHT HUB BOT",
-                        Content = "!!You Are Max Point!!",
+                        Name = "Apsara Hub",
+                        Content = "You Are Max Point, Turn Off Plz",
                         Image = "rbxassetid://14919714384",
                         Time = 5
                     })
@@ -8566,7 +8569,7 @@ spawn(function()
         if Mybeli <= 2500000 or MyFragment <= 5000 then
             wait(2.0)
             OrionLib:MakeNotification({
-                Name = "Night Hub",
+                Name = "Apsara Hub",
                 Content = "You not have beli or fragment!",
                 Image = "rbxassetid://4483345998",
                 Time = 5
@@ -8727,7 +8730,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "NIGHT HUB BOT",
+                            Name = "Apsara Hub",
                             Content = "Not Have Superhuman",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -8740,7 +8743,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "NIGHT HUB BOT",
+                            Name = "Apsara Hub",
                             Content = "Not Have Death Step",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -8753,7 +8756,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "NIGHT HUB BOT",
+                            Name = "Apsara Hub",
                             Content = "Not Have SharkMan Karate",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -8766,7 +8769,7 @@ spawn(function()
                         end
                     else
                         gOrionLib:MakeNotification({
-                            Name = "NIGHT HUB BOT",
+                            Name = "Apsara Hub",
                             Content = "Not Have Electric Claw",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -8777,7 +8780,7 @@ spawn(function()
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon").Level.Value >= 400 or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Talon") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Talon").Level.Value >= 400 then
                             if string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman",true), "Bring") then
                                 OrionLib:MakeNotification({
-                                    Name = "NIGHT HUB BOT",
+                                    Name = "Apsara Hub",
                                     Content = "Not Have Enough Material",
                                     Image = "rbxassetid://14919714384",
                                     Time = 5
@@ -8789,7 +8792,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "NIGHT HUB BOT",
+                            Name = "Apsara Hub",
                             Content = "You Not Have Dragon Talon! ",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -10943,7 +10946,7 @@ spawn(function()
         pcall(function()
             if _G.AutoRace then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
-                wait(0.1)
+                wait(0.001)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
             end
         end)
@@ -11071,7 +11074,7 @@ spawn(function()
         end
     end)
 end)
-local Delay = 1
+local Delay = 0
 spawn(function()
     while wait() do
         pcall(function()
@@ -11123,7 +11126,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if KillPlayer then
-            if Distance < 10 then
+            if Distance < 5 then
             if useskilltrial then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
                 wait(0.1)
@@ -11133,7 +11136,7 @@ spawn(function()
                 wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
                 wait(0.1)
-                game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
                 wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
                 wait(0.1)
@@ -11184,7 +11187,7 @@ spawn(function()
             if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" or game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
                 wait(2.0)
                 OrionLib:MakeNotification({
-                    Name = "Night Hub",
+                    Name = "Apsara Hub",
                     Content = "Turn Off Hop Find Moon Please",
                     Image = "rbxassetid://4483345998",
                     Time = 5
@@ -11192,7 +11195,7 @@ spawn(function()
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Night Hub",
+                    Name = "Apsara Hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://4483345998",
                     Time = 5
@@ -11200,7 +11203,7 @@ spawn(function()
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Night Hub",
+                    Name = "Apsara Hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://4483345998",
                     Time = 5
@@ -11208,7 +11211,7 @@ spawn(function()
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Night Hub",
+                    Name = "Apsara Hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://4483345998",
                     Time = 5
@@ -11220,8 +11223,8 @@ spawn(function()
         end
     end)
 OrionLib:MakeNotification({
-        Name = "Night Hub",
-        Content = "Loading script complete!, You can now enable the function!",
+        Name = "Apsra Hub",
+        Content = "Loading script complete!",
         Image = "rbxassetid://4483345998",
         Time = 5
     })
@@ -11258,7 +11261,7 @@ spawn(function()
 end)
 OrionLib:Init()
 OrionLib:MakeNotification({
-    Name = "Night Hub",
+    Name = "Apsara Hub",
     Content = "Loading Config Complete!!",
     Image = "rbxassetid://4483345998",
     Time = 5

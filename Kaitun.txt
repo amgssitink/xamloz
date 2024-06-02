@@ -6399,27 +6399,25 @@ spawn(function()
 			end
 		end)
 	end)
-
-SEV:AddToggle({
-    Name = "Set Speed Boat",
-    Default = false,
-    Flag = "SetSpeed",
-    Save = true,
-    Callback = function(value)
-        _G.SpeedBoat = value
-    end    
+	
+SEV:AddSlider({Name = "Set Speed", Min = 0, Max = 600, Default = 250, Color = Color3.fromRGB(255,255,255), Increment = 1, ValueName = "Health", Callback = function(vsetspeedboat)
+    setspeedboat = vsetspeedboat
+	end    
 })
+
+SEV:AddToggle({Name = "Change Speed Boat", Default = false, Callback = function(vSpeedBoat)
+	SpeedBoat = vSpeedBoat
+end    
+}) 
 game:GetService("RunService").RenderStepped:Connect(function()
-    if _G.SpeedBoat then
+    if SpeedBoat then
         for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
             if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit then
-                v:FindFirstChild("VehicleSeat").MaxSpeed = SetSpeedBoat
+                v:FindFirstChild("VehicleSeat").MaxSpeed = setspeedboat
             end
         end
     end
 end)
-
-SetSpeedBoatSlider:SetValue(300)
 
 SEV:AddToggle({
     Name = "Auto TerrorShark",

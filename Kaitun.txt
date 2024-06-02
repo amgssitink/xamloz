@@ -2368,7 +2368,7 @@ local R = Window:MakeTab({
     PremiumOnly = false
 })
 
-local SV = Window:MakeTab({
+local SEV = Window:MakeTab({
     Name = "Sea Event Tabs",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
@@ -6222,7 +6222,7 @@ R:AddToggle({
 
 SV:AddParagraph("Kitsune Event")
 
-local mr = SV:AddLabel("")
+local mr = SEV:AddLabel("")
 
 task.spawn(function()
 	while task.wait() do
@@ -6241,7 +6241,7 @@ end)
 
 
 
-MSV:AddToggle({
+SEV:AddToggle({
     Name = "Tween To Kitsune Island",
     Default = false,
     Flag = "KitsuneIslandTween",
@@ -6273,7 +6273,7 @@ spawn(function()
     end
 end)
 
-SV:AddToggle({
+SEV:AddToggle({
     Name = "Auto CollectAzure Ember",
     Default = false,
     Flag = "AutoAzureEmber",
@@ -6297,7 +6297,7 @@ spawn(function()
 end)
 
 
-SV:AddToggle({
+SEV:AddToggle({
     Name = "Esp Kitsune",
     Default = false,
     Flag = "EspKitsune",
@@ -6346,9 +6346,9 @@ function UpdateKitsune()
 	end
 end
 
-SV:AddParagraph("Sea Event","")
+SEV:AddParagraph("Sea Event")
 
-SV:AddToggle({
+SEV:AddToggle({
     Name = "Auto TerrorShark",
     Default = false,
     Flag = "Terrorshark",
@@ -6359,7 +6359,7 @@ SV:AddToggle({
     end    
 })
 
-SV:AddToggle({
+SEV:AddToggle({
     Name = "Auto Shark",
     Default = false,
     Flag = "Shark",
@@ -6407,7 +6407,7 @@ spawn(function()
     end
 end)
 
-SV:AddToggle({
+SEV:AddToggle({
     Name = "Auto Piranha",
     Default = false,
     Flag = "Piranha",
@@ -6419,7 +6419,7 @@ SV:AddToggle({
 })
 
 
-SV:AddToggle({
+SEV:AddToggle({
     Name = "Auto Fish Crew",
     Default = false,
     Flag = "FishCrew",
@@ -6552,7 +6552,7 @@ end)
         end)
     end
  
-SV:AddToggle({
+SEV:AddToggle({
         Name = "Auto Seabeast",
         Default = false,
         Flag = "Auto Seabeast",
@@ -6562,7 +6562,49 @@ SV:AddToggle({
             StopTween(_G.AutoSeaBest)
         end    
     })
-       
+
+SEV:AddToggle({
+        Name = "Auto Ship",
+        Default = false,
+        Flag = "Ship",
+        Save = true,
+        Callback = function(Value)
+            _G.Ship = Value
+        end    
+    })
+       function CheckPirateBoat()
+        local checkmmpb = {"PirateGrandBrigade", "PirateBrigade"}
+        for r, v in next, game:GetService("Workspace").Enemies:GetChildren() do
+            if table.find(checkmmpb, v.Name) and v:FindFirstChild("Health") and v.Health.Value > 0 then
+                return v
+            end
+        end
+    end
+    
+    spawn(function()
+while wait() do
+    if _G.Ship then
+        pcall(function()
+            if CheckPirateBoat() then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,32,false,game)
+                wait(.5)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,32,false,game)
+                local v = CheckPirateBoat()
+                repeat
+                    wait()
+                    spawn(Tween(v.Engine.CFrame * CFrame.new(0, -20, 0)), 1)
+                    AimBotSkillPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -5, 0)
+                    Skillaimbot = true
+                    AutoSkill = false
+                until not v or not v.Parent or v.Health.Value <= 0 or not CheckPirateBoat()
+                Skillaimbot = true
+                AutoSkill = false
+            end
+        end)
+    end
+end
+end)
+
 local Section = C:AddSection({
     Name = "Open Tab"
 })

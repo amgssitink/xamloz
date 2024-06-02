@@ -6403,7 +6403,7 @@ spawn(function()
 SEV:AddToggle({
     Name = "Set Speed Boat",
     Default = false,
-    Flag = "Terrorshark",
+    Flag = "SetSpeed",
     Save = true,
     Callback = function(value)
         _G.SpeedBoat = value
@@ -6417,23 +6417,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
             end
         end
     end
-end)
-
-SEV:AddSlider({
-    Name = "Set Speed Boat",
-    Min = 300,
-    Max = 1000,
-    Default = 300,
-    Color = Color3.fromRGB(255,255,255),
-    Increment = 1,
-    ValueName = "Speed",
-    Flag = "Speed Boat",
-    Save = true,
-    Callback = function(Value)
-        _G.SetSpeedBoat = value
-    end    
-})
-SetSpeedBoat = value
 end)
 
 SetSpeedBoatSlider:SetValue(300)

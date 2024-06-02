@@ -2868,7 +2868,7 @@ ST:AddDropdown({
     end    
 })
 spawn(function()
-    while wait(.001) do
+    while wait(.1) do
         if _G.BringMode then
             pcall(function()
                 if _G.BringMode == "Low" then
@@ -2883,7 +2883,7 @@ spawn(function()
     end
 end)
 
-M:AddToggle({
+ST:AddToggle({
     Name = "Fast Attack",
     Default = true,
     Flag = "FastAttack",
@@ -3308,7 +3308,7 @@ ST:AddDropdown({
 	end    
 })
 spawn(function()
-    while wait(.001) do
+    while wait(.1) do
         if _G.FastAttackDelay then
             pcall(function()
                 if _G.FastAttackDelay == "0" then
@@ -3366,6 +3366,7 @@ ST:AddToggle({
         BypassTP = Value 
     end    
 })
+
 ST:AddToggle({
     Name = "Auto Haki",
     Default = true,

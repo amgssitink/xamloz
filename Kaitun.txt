@@ -2729,7 +2729,7 @@ SH:AddButton({
 })
 
 SH:AddButton({
-    Name = "Buy Ghoul Race :",
+    Name = "Buy Cyborg Race :",
     Callback = function()
         local a = {
             [1] = "CyborgTrainer",
@@ -4356,11 +4356,11 @@ IQ:AddToggle({
 })
 
     local Section = IQ:AddSection({
-        Name = "Soul Guita"
+        Name = "Soul Guitar"
     })
 
     IQ:AddToggle({
-        Name = "Auto Soul Guita",
+        Name = "Auto Soul Guitar",
         Default = false,
         Flag = "Auto Soul",
         Save = true,
@@ -4486,7 +4486,7 @@ IQ:AddToggle({
             Name = "ArenaTrainer"
         })
 
-        IQ:AddLabel("Cho thằng nào đell hiểu thì đây là tự động đánh hình nộm")
+        IQ:AddLabel("Hit The Face Dummy")
 
         IQ:AddToggle({
             Name = "Automatically hit the dummy",
@@ -4496,16 +4496,6 @@ IQ:AddToggle({
             Callback = function(Value)
                 _G.Namfon = Value
                 StopTween(_G.Namfon)
-            end    
-        })
-
-        IQ:AddToggle({
-            Name = "Automatically hit the dummy[HOP]",
-            Default = false,
-            Flag = "Auto dummy[HOP]",
-            Save = true,
-            Callback = function(Value)
-                _G.Hop = Value
             end    
         })
 
@@ -6274,7 +6264,7 @@ spawn(function()
 end)
 
 SEV:AddToggle({
-    Name = "Auto CollectAzure Ember",
+    Name = "Auto Collect Azure Ember",
     Default = false,
     Flag = "AutoAzureEmber",
     Save = true,
@@ -6409,7 +6399,45 @@ spawn(function()
 			end
 		end)
 	end)
-	
+
+SEV:AddToggle({
+    Name = "Set Speed Boat",
+    Default = false,
+    Flag = "Terrorshark",
+    Save = true,
+    Callback = function(value)
+        _G.SpeedBoat = value
+    end    
+})
+game:GetService("RunService").RenderStepped:Connect(function()
+    if _G.SpeedBoat then
+        for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+            if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit then
+                v:FindFirstChild("VehicleSeat").MaxSpeed = SetSpeedBoat
+            end
+        end
+    end
+end)
+
+SEV:AddSlider({
+    Name = "Set Speed Boat",
+    Min = 300,
+    Max = 1000,
+    Default = 300,
+    Color = Color3.fromRGB(255,255,255),
+    Increment = 1,
+    ValueName = "Speed",
+    Flag = "Speed Boat",
+    Save = true,
+    Callback = function(Value)
+        _G.SetSpeedBoat = value
+    end    
+})
+SetSpeedBoat = value
+end)
+
+SetSpeedBoatSlider:SetValue(300)
+
 SEV:AddToggle({
     Name = "Auto TerrorShark",
     Default = false,

@@ -3629,6 +3629,8 @@ function AttackNoCD()
     end
 end
 
+_G.SuperFastMode = value
+
 local plr = game.Players.LocalPlayer
 
 local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))

@@ -6354,6 +6354,68 @@ SEV:AddToggle({
     Flag = "Terrorshark",
     Save = true,
     Callback = function(value)
+        _G.SailBoat = Value
+    end    
+})
+spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.SailBoat then
+                    if not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+                        if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                            buyb = TweenBoat(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                            if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                if buyb then buyb:Stop() end
+                                local args = {
+                                    [1] = "Beast Hunter",
+                                    [2] = "Beast Hunter"
+                                }
+    
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                        elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                            if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                                TweenBoat(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                            else
+                                for i,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                    if v.Name == "PirateGrandBrigade" then
+                                        repeat wait(_G.Fast_Delay)
+                                            if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
+                                            elseif (CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375))
+                                            elseif (CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
+                                            end 
+                                        until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.SailBoat == false
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    
+    spawn(function()
+		pcall(function()
+			while wait() do
+				if _G.SailBoat then
+					if game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+					    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+					end
+				end
+			end
+		end)
+	end)
+	
+SEV:AddToggle({
+    Name = "Auto TerrorShark",
+    Default = false,
+    Flag = "Terrorshark",
+    Save = true,
+    Callback = function(value)
         _G.AutoTerrorshark = value
         StopTween( _G.AutoTerrorshark)
     end    
@@ -6605,6 +6667,128 @@ while wait() do
 end
 end)
 
+SEV:AddToggle({
+        Name = "Auto GhostShip",
+        Default = false,
+        Flag = "GhostShip",
+        Save = true,
+        Callback = function(Value)
+            _G.GhostShip = Value
+        end    
+    })
+       function CheckPirateBoat()
+        local checkmmpb = {"FishBoat"}
+        for r, v in next, game:GetService("Workspace").Enemies:GetChildren() do
+            if table.find(checkmmpb, v.Name) and v:FindFirstChild("Health") and v.Health.Value > 0 then
+                return v
+            end
+        end
+    end
+spawn(function()
+while wait() do
+    pcall(function()
+        if _G.bjirFishBoat then
+            if CheckPirateBoat() then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 32, false, game)
+                wait(0.5)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 32, false, game)
+                local v = CheckPirateBoat()
+                repeat
+                    wait()
+                    spawn(Tween(v.Engine.CFrame * CFrame.new(0, -20, 0), 1))
+                    AutoSkill = true
+                    Skillaimbot = true
+                    AimBotSkillPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -5, 0)
+                until v.Parent or v.Health.Value <= 0 or not CheckPirateBoat()
+                AutoSkill = false
+                Skillaimbot = false
+            end
+        end
+    end)
+end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.bjirFishBoat then
+               pcall(function()
+                    if CheckPirateBoat() then
+                        AutoHaki()
+                        game:GetService("VirtualUser"):CaptureController()
+                        game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if v:IsA("Tool") then
+                                if v.ToolTip == "Melee" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                end
+                            end
+                        end
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if v:IsA("Tool") then
+                                if v.ToolTip == "Blox Fruit" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                end
+                            end
+                        end
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(0.6)
+                        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if v:IsA("Tool") then
+                                if v.ToolTip == "Sword" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                end
+                            end
+                        end
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(0.5)
+                        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if v:IsA("Tool") then
+                                if v.ToolTip == "Gun" then -- "Blox Fruit" , "Sword" , "Wear" , "Agility"
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                                end
+                            end
+                        end
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        wait(.2)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                    end
+                end)
+            end
+    end
+      end)
+      
 local Section = C:AddSection({
     Name = "Open Tab"
 })

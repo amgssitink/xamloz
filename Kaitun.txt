@@ -6349,9 +6349,9 @@ end
 SEV:AddParagraph("Sea Event")
 
 SEV:AddToggle({
-    Name = "Auto TerrorShark",
+    Name = "Auto Buy And Sail To Sea 6",
     Default = false,
-    Flag = "Terrorshark",
+    Flag = "SailAndTpto6",
     Save = true,
     Callback = function(value)
         _G.SailBoat = Value

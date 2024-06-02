@@ -1662,7 +1662,7 @@ function TweenTempleLegit()
     end
 	end)
 
-_G.FastAttack = true
+_G.FastAttack = Value
  
 local plr = game.Players.LocalPlayer
 
@@ -1725,7 +1725,7 @@ function AttackNoCD()
 end
 spawn(function()
     while wait() do
-        if _G.memaybeoCDAAT then
+        if _G.FastAttack then
             pcall(function()
                 AttackNoCD()
             end)
@@ -3638,7 +3638,7 @@ ST:AddToggle({
         _G.FastAttack = Value
     end    
 })
-_G.FastAttack = true
+_G.FastAttack = Value
  
 local plr = game.Players.LocalPlayer
 
@@ -3701,7 +3701,7 @@ function AttackNoCD()
 end
 spawn(function()
     while wait() do
-        if _G.memaybeoCDAAT then
+        if _G.FastAttack then
             pcall(function()
                 AttackNoCD()
             end)

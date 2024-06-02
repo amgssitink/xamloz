@@ -3,7 +3,7 @@ spawn(
         while wait() do
             pcall(
                 function()                    
-                    setfpscap(99999)
+                    setfpscap(9999999)
                 end
             )
         end
@@ -2124,7 +2124,7 @@ function AttackHit()
         bladehit = cac
         if #bladehit > 0 then
             pcall(function()
-                CmrFwLib.activeController.timeToNextAttack = 1
+                CmrFwLib.activeController.timeToNextAttack = 0
                 CmrFwLib.activeController.attacking = false
                 CmrFwLib.activeController.blocking = false
                 CmrFwLib.activeController.timeToNextBlock = 0
@@ -4080,7 +4080,7 @@ function AttackHit()
         bladehit = cac
         if #bladehit > 0 then
             pcall(function()
-                CmrFwLib.activeController.timeToNextAttack = 1
+                CmrFwLib.activeController.timeToNextAttack = 0
                 CmrFwLib.activeController.attacking = false
                 CmrFwLib.activeController.blocking = false
                 CmrFwLib.activeController.timeToNextBlock = 0
@@ -4105,7 +4105,7 @@ ST:AddDropdown({
 	end    
 })
 spawn(function()
-    while wait(.0001) do
+    while wait(.001) do
         if _G.FastAttackDelay then
             pcall(function()
                 if _G.FastAttackDelay == "Supper Fast Attack" then
@@ -7027,6 +7027,13 @@ spawn(function()
         end 
     end
 end)
+
+C:AddButton({
+    Name = "Lock Fps",
+    Callback = function()
+        setfpscap(9999999)
+      end    
+})
 
 local Section = C:AddSection({
     Name = "Level Lock"

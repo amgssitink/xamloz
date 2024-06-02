@@ -1,3 +1,13 @@
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()                    
+                    setfpscap(99999)
+                end
+            )
+        end
+    end)
 if game.PlaceId == 2753915549 then
     World1 = true
 elseif game.PlaceId == 4442272183 then
@@ -4070,7 +4080,7 @@ function AttackHit()
         bladehit = cac
         if #bladehit > 0 then
             pcall(function()
-                CmrFwLib.activeController.timeToNextAttack = 0
+                CmrFwLib.activeController.timeToNextAttack = 1
                 CmrFwLib.activeController.attacking = false
                 CmrFwLib.activeController.blocking = false
                 CmrFwLib.activeController.timeToNextBlock = 0
@@ -4256,7 +4266,7 @@ game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 })
 
 ST:AddToggle({
-    Name = "White screen",
+    Name = "White Screen",
     Default = false,
     Flag = "White screen",
     Save = true,
@@ -6931,7 +6941,7 @@ spawn(function()
     end
       end)
 
-SEV:AddParagraph("Sea Event")
+SEV:AddParagraph("Leviathan Section")
 
 SEV:AddButton({
     Name = "Teleport To Frozen Dimension",

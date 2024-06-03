@@ -5922,6 +5922,17 @@ R:AddButton({
         StopTween(_G.Miragenpc)	
       end    
 })
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.Miragenpc then
+                if game:GetService("Workspace").NPCs:FindFirstChild("Advanced Fruit Dealer") then
+                    topos(CFrame.new(game:GetService("Workspace").NPCs["Advanced Fruit Dealer"].HumanoidRootPart.Position))
+                end
+            end
+        end
+    end)
+end)
 
 R:AddButton({
     Name = "Teleport to Gear",

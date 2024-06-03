@@ -943,7 +943,7 @@ function UpdateAfdESP()
         end)
     end
 end
-function UpdateGeaESP() 
+function UpdateGearESP() 
     for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do 
         pcall(function()
             if GearESP then 
@@ -4638,7 +4638,7 @@ E:AddToggle({
     Callback = function(Value)
         AfdESP = value
         while AfdESP do wait()
-            UpdateAfdESP()
+        UpdateAfdESP()
     end    
 })
 
@@ -4650,7 +4650,7 @@ E:AddToggle({
     Callback = function(Value)
         GearESP = value
         while GearESP do wait()
-            UpdateGeaESP() 
+        UpdateGeaESP() 
     end    
 })
 
@@ -5984,7 +5984,7 @@ R:AddToggle({
     end
 })
 
-SV:AddParagraph("Kitsune Event")
+SEV:AddParagraph("Kitsune Event")
 
 local mr = SEV:AddLabel("")
 

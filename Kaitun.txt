@@ -1117,15 +1117,15 @@ end
     elseif Distance < 50 then
         Speed = 2000
     elseif Distance < 150 then
-        Speed = 900
+        Speed = 800
     elseif Distance < 250 then
         Speed = 600
     elseif Distance < 500 then
-        Speed = 500
-    elseif Distance < 750 then
         Speed = 400
+    elseif Distance < 750 then
+        Speed = 250
     elseif Distance >= 1000 then
-        Speed = 350
+        Speed = 250
     end
     game:GetService("TweenService"):Create(
         game.Players.LocalPlayer.Character.HumanoidRootPart,
@@ -1149,7 +1149,7 @@ end
         elseif Distance < 750 then
             Speed = 250
         elseif Distance >= 1000 then
-            Speed = 500
+            Speed = 200
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -1173,7 +1173,7 @@ end
         elseif Distance < 750 then
             Speed = 250
         elseif Distance >= 1000 then
-            Speed = 300
+            Speed = 200
         end
         game:GetService("TweenService"):Create(
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -2391,7 +2391,7 @@ local C = Window:MakeTab({
 local Section = W:AddSection({
     Name = "Credit"
 })
-W:AddLabel("Coding By iamapsaralearncofing")
+W:AddLabel("Coding By iamapsara")
 local Section = W:AddSection({
     Name = "Update"
 })

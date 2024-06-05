@@ -1044,80 +1044,6 @@ local function round(n)
 return math.floor(tonumber(n) + 0.5)
 end
 Number = math.random(1, 1000000)
-function UpdateAfdESP() 
-    for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
-        pcall(function()
-            if AfdESP then 
-                if v.Name == "Advanced Fruit Dealer" then
-                    if not v:FindFirstChild('NameEsp') then
-                        local bill = Instance.new('BillboardGui',v)
-                        bill.Name = 'NameEsp'
-                        bill.ExtentsOffset = Vector3.new(0, 1, 0)
-                        bill.Size = UDim2.new(1,200,1,30)
-                        bill.Adornee = v
-                        bill.AlwaysOnTop = true
-                        local name = Instance.new('TextLabel',bill)
-                        name.Font = "Code"
-                        name.FontSize = "Size14"
-                        name.TextWrapped = true
-                        name.Size = UDim2.new(1,0,1,0)
-                        name.TextYAlignment = 'Top'
-                        name.BackgroundTransparency = 1
-                        name.TextStrokeTransparency = 0.5
-                        name.TextColor3 = Color3.fromRGB(80, 245, 245)
-                    else
-                        v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
-                    end
-                end
-            else
-                if v:FindFirstChild('NameEsp') then
-                    v:FindFirstChild('NameEsp'):Destroy()
-                end
-            end
-        end)
-    end
-end
-function UpdateGearESP() 
-    for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do 
-        pcall(function()
-            if GearESP then 
-                if v.Name == "MeshPart" then
-                    if not v:FindFirstChild('NameEsp') then
-                        local bill = Instance.new('BillboardGui',v)
-                        bill.Name = 'NameEsp'
-                        bill.ExtentsOffset = Vector3.new(0, 1, 0)
-                        bill.Size = UDim2.new(1,200,1,30)
-                        bill.Adornee = v
-                        bill.AlwaysOnTop = true
-                        local name = Instance.new('TextLabel',bill)
-                        name.Font = "Code"
-                        name.FontSize = "Size14"
-                        name.TextWrapped = true
-                        name.Size = UDim2.new(1,0,1,0)
-                        name.TextYAlignment = 'Top'
-                        name.BackgroundTransparency = 1
-                        name.TextStrokeTransparency = 0.5
-                        name.TextColor3 = Color3.fromRGB(80, 245, 245)
-                    else
-                        v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
-                    end
-                end
-            else
-                if v:FindFirstChild('NameEsp') then
-                    v:FindFirstChild('NameEsp'):Destroy()
-                end
-            end
-        end)
-    end
-end
-
-function isnil(thing)
-return (thing == nil)
-end
-local function round(n)
-return math.floor(tonumber(n) + 0.5)
-end
-Number = math.random(1, 1000000)
 function Click()
     wait(.1)
     game:GetService'VirtualUser':CaptureController()
@@ -2145,33 +2071,6 @@ function Click()
     bc:CaptureController()
     bc:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
 end
-
-local Client = game.Players.LocalPlayer
-    local STOP = require(Client.PlayerScripts.CombatFramework.Particle)
-    local STOPRL = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
-    spawn(function()
-        while task.wait() do
-            pcall(function()
-                if not shared.orl then shared.orl = STOPRL.wrapAttackAnimationAsync end
-                if not shared.cpc then shared.cpc = STOP.play end
-                    STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-                    local Hits = STOPRL.getBladeHits(b,c,d)
-                    if Hits then
-                        if _G.FastAttack then
-                            STOP.play = function() end
-                            a:Play(0,0,0)
-                            func(Hits)
-                            STOP.play = shared.cpc
-                            wait(a.length * 0.5)
-                            a:Stop()
-                        else
-                            a:Play()
-                        end
-                    end
-                end
-            end)
-        end
-    end)
 
     HttpService = game:GetService("HttpService")
     local i = "Apsara Hub"
@@ -4638,30 +4537,6 @@ E:AddToggle({
     end    
 })
 
-E:AddToggle({
-    Name = "ESP Advanced Fruit Dealer",
-    Default = false,
-    Flag = "ESP Advanced Fruit Dealer",
-    Save = true,
-    Callback = function(Value)
-        AfdESP = value
-        while AfdESP do wait()
-        UpdateAfdESP()
-    end    
-})
-
-E:AddToggle({
-    Name = "ESP Gear",
-    Default = false,
-    Flag = "ESP Gear",
-    Save = true,
-    Callback = function(Value)
-        GearESP = value
-        while GearESP do wait()
-        UpdateGeaESP() 
-    end    
-})
-
 local TimeRaid = RA:AddLabel("Wait For Dungeon")
 
 local checkisland = RA:AddLabel("Island : Not Raid")
@@ -5992,7 +5867,7 @@ R:AddToggle({
     end
 })
 
-SEV:AddParagraph("Kitsune Event")
+SV:AddParagraph("Kitsune Event")
 
 local mr = SEV:AddLabel("")
 

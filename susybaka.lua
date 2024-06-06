@@ -1668,7 +1668,6 @@ function TweenTempleLegit()
     end
 	end)
 
-
 local plr = game.Players.LocalPlayer
 local CbFw = debug.getupvalues(require(game.Players.LocalPlayer.PlayerScripts.CombatFramework))
 local CbFw2 = CbFw[2]
@@ -1767,109 +1766,6 @@ function AttackNoCD(Num)
         end
     end
 end
-
-local STOP = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle)
-local STOPRL = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
-if not shared.orl then
-    shared.orl = STOPRL.wrapAttackAnimationAsync
-end
-if not shared.cpc then
-    shared.cpc = STOP.play 
-end
-spawn(function()
-    while task.wait() do
-        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-            local Hits = STOPRL.getBladeHits(b,c,d)
-            if Hits then
-                STOP.play = function() end
-                a:Play(15.25,15.25,15.25)
-                func(Hits)                
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end         
-            if Hits then
-                STOP.play = function() end
-                a:Play(15.25,15.25,15.25)
-                func(Hits)
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end      
-        end
-        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-            local Hits = STOPRL.getBladeHits(b,c,d)
-            if Hits then
-                STOP.play = function() end
-                a:Play(15.25,15.25,15.25)
-                func(Hits)                
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end         
-            if Hits then
-                STOP.play = function() end
-                a:Play(15.25,15.25,15.25)
-                func(Hits)
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end      
-        end
-    end
-end)
-spawn(function()
-    while task.wait() do
-        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-            local Hits = STOPRL.getBladeHits(b,c,d)
-            if Hits then
-                STOP.play = function() end
-                a:Play(0.01,0.01,0.01)
-                func(Hits)                
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end             
-        end
-    end
-end)
-spawn(function()
-    while task.wait() do
-        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-            local Hits = STOPRL.getBladeHits(b,c,d)
-            if Hits then
-                STOP.play = shared.cpc
-                func(Hits)   
-            end             
-        end
-    end
-end)
-spawn(function()
-    while task.wait() do 
-        pcall(function()
-                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
-                    AttackNoCD(0)
-                end
-        end)
-    end
-end)
-b2 = tick()
-spawn(function()
-    while wait(CheckSpeed("Supper Fast Attack")) do
-        if b2 - tick() > 0.5 then
-            wait(0.01)
-            b2 = tick()
-        end
-        pcall(function()
-            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
-                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-                end
-                AttackNoCD(0)
-            end
-        end)
-    end
-end)
 
     HttpService = game:GetService("HttpService")
     local i = "Apsara Hub"

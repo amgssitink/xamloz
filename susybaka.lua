@@ -1668,28 +1668,24 @@ function TweenTempleLegit()
     end
 	end)
 
-function GetBladeHit()
-    local CombatFrameworkLib =
-        debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
-    local CmrFwLib = CombatFrameworkLib[2]
-    local p13 = CmrFwLib.activeController
-    local weapon = p13.blades[1]
-    if not weapon then
-        return weapon
-    end
-    while weapon.Parent ~= game.Players.LocalPlayer.Character do
-        weapon = weapon.Parent
-    end
-    return weapon
+_G.memaybeoCDAAT = true
+ 
+local plr = game.Players.LocalPlayer
+
+local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
+local CbFw2 = CbFw[2]
+
+function GetCurrentBlade() 
+    local p13 = CbFw2.activeController
+    local ret = p13.blades[1]
+    if not ret then return end
+    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+    return ret
 end
-function AttackHit()
-    local CombatFrameworkLib =
-        debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
-    local CmrFwLib = CombatFrameworkLib[2]
-    local plr = game.Players.LocalPlayer
-    for i = 1, 1 do
-        local bladehit =
-            require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+function AttackNoCD() 
+    local AC = CbFw2.activeController
+    for i = 1, 1 do 
+        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
             plr.Character,
             {plr.Character.HumanoidRootPart},
             60
@@ -1704,25 +1700,44 @@ function AttackHit()
         end
         bladehit = cac
         if #bladehit > 0 then
-            pcall(
-                function()
-                    CmrFwLib.activeController.timeToNextAttack = 1
-                    CmrFwLib.activeController.attacking = false
-                    CmrFwLib.activeController.blocking = false
-                    CmrFwLib.activeController.timeToNextBlock = 0
-                    CmrFwLib.activeController.increment = 3
-                    CmrFwLib.activeController.hitboxMagnitude = 120
-                    CmrFwLib.activeController.focusStart = 0
-                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer(
-                        "weaponChange",
-                        tostring(GetBladeHit())
-                    )
-                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
-                end
-            )
+            local u8 = debug.getupvalue(AC.attack, 5)
+            local u9 = debug.getupvalue(AC.attack, 6)
+            local u7 = debug.getupvalue(AC.attack, 4)
+            local u10 = debug.getupvalue(AC.attack, 7)
+            local u12 = (u8 * 798405 + u7 * 727595) % u9
+            local u13 = u7 * 798405
+            (function()
+                u12 = (u12 * u9 + u13) % 1099511627776
+                u8 = math.floor(u12 / u9)
+                u7 = u12 - u8 * u9
+            end)()
+            u10 = u10 + 1
+            debug.setupvalue(AC.attack, 5, u8)
+            debug.setupvalue(AC.attack, 6, u9)
+            debug.setupvalue(AC.attack, 4, u7)
+            debug.setupvalue(AC.attack, 7, u10)
+            pcall(function()
+                for k, v in pairs(AC.animator.anims.basic) do
+                    v:Play()
+                end                  
+            end)
+            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
+            end
         end
     end
 end
+spawn(function()
+    while wait() do
+        if _G.memaybeoCDAAT then
+            pcall(function()
+                AttackNoCD()
+            end)
+        end
+    end
+end)
 spawn(function()
  while wait(CheckSpeed("Fast")) do
     AttackHit()
@@ -1734,11 +1749,11 @@ repeat wait(0) until game:IsLoaded()
 function CheckSpeed(Def)
     if Def == "Fast" then
        if FastSpeed == "Normal" then
-        return 0.2
+        return 0.001
        elseif FastSpeed == "Fast" then
-        return 0.1
+        return 0
        else
-         return 0.2
+         return 0
        end
     end
     end
@@ -1806,7 +1821,7 @@ function AttackNoCD(Num)
         end
     elseif Num == 0 then
         local AC = CbFw2.activeController
-        for i = 1,1 do 
+        for i = 0,1 do 
             local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
                 plr.Character,
                 {plr.Character.HumanoidRootPart},
@@ -1930,7 +1945,7 @@ end)
 b2 = tick()
 spawn(function()
     while wait(CheckSpeed("Fast")) do
-        if b2 - tick() > 0.5 then
+        if b2 - tick() > 0.1 then
             wait(0.01)
             b2 = tick()
         end
@@ -3493,9 +3508,9 @@ spawn(function()
         if _G.FastAttackDelay then
             pcall(function()
                 if _G.FastAttackDelay == "Normal" then
-                    _G.FastAttackDelay = 0.2
+                    _G.FastAttackDelay = 0.001
                 elseif _G.FastAttackDelay == "Fast" then
-                    _G.FastAttackDelay = 0.1
+                    _G.FastAttackDelay = 0
                 end
             end)
         end
@@ -7513,25 +7528,28 @@ spawn(function()
     end
 end)
 
-function GetBladeHit()
-    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
-    local CmrFwLib = CombatFrameworkLib[2]
-    local p13 = CmrFwLib.activeController
-    local weapon = p13.blades[1]
-    if not weapon then 
-        return weapon
-    end
-    while weapon.Parent ~= game.Players.LocalPlayer.Character do
-        weapon = weapon.Parent 
-    end
-    return weapon
+_G.memaybeoCDAAT = true
+ 
+local plr = game.Players.LocalPlayer
+
+local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
+local CbFw2 = CbFw[2]
+
+function GetCurrentBlade() 
+    local p13 = CbFw2.activeController
+    local ret = p13.blades[1]
+    if not ret then return end
+    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+    return ret
 end
-function AttackHit()
-    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
-    local CmrFwLib = CombatFrameworkLib[2]
-    local plr = game.Players.LocalPlayer
-    for i = 1, 1 do
-        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
+function AttackNoCD() 
+    local AC = CbFw2.activeController
+    for i = 1, 1 do 
+        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+            plr.Character,
+            {plr.Character.HumanoidRootPart},
+            60
+        )
         local cac = {}
         local hash = {}
         for k, v in pairs(bladehit) do
@@ -7542,20 +7560,44 @@ function AttackHit()
         end
         bladehit = cac
         if #bladehit > 0 then
+            local u8 = debug.getupvalue(AC.attack, 5)
+            local u9 = debug.getupvalue(AC.attack, 6)
+            local u7 = debug.getupvalue(AC.attack, 4)
+            local u10 = debug.getupvalue(AC.attack, 7)
+            local u12 = (u8 * 798405 + u7 * 727595) % u9
+            local u13 = u7 * 798405
+            (function()
+                u12 = (u12 * u9 + u13) % 1099511627776
+                u8 = math.floor(u12 / u9)
+                u7 = u12 - u8 * u9
+            end)()
+            u10 = u10 + 1
+            debug.setupvalue(AC.attack, 5, u8)
+            debug.setupvalue(AC.attack, 6, u9)
+            debug.setupvalue(AC.attack, 4, u7)
+            debug.setupvalue(AC.attack, 7, u10)
             pcall(function()
-                CmrFwLib.activeController.timeToNextAttack = 1
-                CmrFwLib.activeController.attacking = false
-                CmrFwLib.activeController.blocking = false
-                CmrFwLib.activeController.timeToNextBlock = 0
-                CmrFwLib.activeController.increment = 3
-                CmrFwLib.activeController.hitboxMagnitude = 120
-                CmrFwLib.activeController.focusStart = 0
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
-                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+                for k, v in pairs(AC.animator.anims.basic) do
+                    v:Play()
+                end                  
             end)
+            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
+            end
         end
     end
 end
+spawn(function()
+    while wait() do
+        if _G.memaybeoCDAAT then
+            pcall(function()
+                AttackNoCD()
+            end)
+        end
+    end
+end)
 
 spawn(function()
     pcall(function()

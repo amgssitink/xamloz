@@ -1738,11 +1738,6 @@ spawn(function()
         end
     end
 end)
-spawn(function()
- while wait(CheckSpeed("Fast")) do
-    AttackHit()
- end
-end)
 
 repeat wait(0) until game:IsLoaded()
 
@@ -1753,7 +1748,7 @@ function CheckSpeed(Def)
        elseif FastSpeed == "Fast" then
         return 0
        else
-         return 0
+         return 0.2
        end
     end
     end
@@ -1821,7 +1816,7 @@ function AttackNoCD(Num)
         end
     elseif Num == 0 then
         local AC = CbFw2.activeController
-        for i = 0,1 do 
+        for i = 1,1 do 
             local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
                 plr.Character,
                 {plr.Character.HumanoidRootPart},
@@ -1945,7 +1940,7 @@ end)
 b2 = tick()
 spawn(function()
     while wait(CheckSpeed("Fast")) do
-        if b2 - tick() > 0.1 then
+        if b2 - tick() > 1.5 then
             wait(0.01)
             b2 = tick()
         end

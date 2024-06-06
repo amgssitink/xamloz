@@ -1668,6 +1668,81 @@ function TweenTempleLegit()
     end
 	end)
 
+function GetBladeHit()
+    local CombatFrameworkLib =
+        debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+    local CmrFwLib = CombatFrameworkLib[2]
+    local p13 = CmrFwLib.activeController
+    local weapon = p13.blades[1]
+    if not weapon then
+        return weapon
+    end
+    while weapon.Parent ~= game.Players.LocalPlayer.Character do
+        weapon = weapon.Parent
+    end
+    return weapon
+end
+function AttackHit()
+    local CombatFrameworkLib =
+        debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+    local CmrFwLib = CombatFrameworkLib[2]
+    local plr = game.Players.LocalPlayer
+    for i = 1, 1 do
+        local bladehit =
+            require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+            plr.Character,
+            {plr.Character.HumanoidRootPart},
+            60
+        )
+        local cac = {}
+        local hash = {}
+        for k, v in pairs(bladehit) do
+            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                table.insert(cac, v.Parent.HumanoidRootPart)
+                hash[v.Parent] = true
+            end
+        end
+        bladehit = cac
+        if #bladehit > 0 then
+            pcall(
+                function()
+                    CmrFwLib.activeController.timeToNextAttack = 1
+                    CmrFwLib.activeController.attacking = false
+                    CmrFwLib.activeController.blocking = false
+                    CmrFwLib.activeController.timeToNextBlock = 0
+                    CmrFwLib.activeController.increment = 3
+                    CmrFwLib.activeController.hitboxMagnitude = 120
+                    CmrFwLib.activeController.focusStart = 0
+                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer(
+                        "weaponChange",
+                        tostring(GetBladeHit())
+                    )
+                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+                end
+            )
+        end
+    end
+end
+spawn(function()
+ while wait(CheckSpeed("Fast")) do
+    AttackHit()
+ end
+end)
+
+repeat wait(0) until game:IsLoaded()
+
+function CheckSpeed(Def)
+    if Def == "Fast" then
+       if FastSpeed == "Normal" then
+        return 0.2
+       elseif FastSpeed == "Fast" then
+        return 0.1
+       else
+         return 0.2
+       end
+    end
+    end
+
 local plr = game.Players.LocalPlayer
 local CbFw = debug.getupvalues(require(game.Players.LocalPlayer.PlayerScripts.CombatFramework))
 local CbFw2 = CbFw[2]
@@ -1731,7 +1806,7 @@ function AttackNoCD(Num)
         end
     elseif Num == 0 then
         local AC = CbFw2.activeController
-        for i = 1 do 
+        for i = 1,1 do 
             local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
                 plr.Character,
                 {plr.Character.HumanoidRootPart},
@@ -1766,6 +1841,109 @@ function AttackNoCD(Num)
         end
     end
 end
+
+local STOP = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle)
+local STOPRL = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
+if not shared.orl then
+    shared.orl = STOPRL.wrapAttackAnimationAsync
+end
+if not shared.cpc then
+    shared.cpc = STOP.play 
+end
+spawn(function()
+    while task.wait() do
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = function() end
+                a:Play(15.25,15.25,15.25)
+                func(Hits)                
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end         
+            if Hits then
+                STOP.play = function() end
+                a:Play(15.25,15.25,15.25)
+                func(Hits)
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end      
+        end
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = function() end
+                a:Play(15.25,15.25,15.25)
+                func(Hits)                
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end         
+            if Hits then
+                STOP.play = function() end
+                a:Play(15.25,15.25,15.25)
+                func(Hits)
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end      
+        end
+    end
+end)
+spawn(function()
+    while task.wait() do
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = function() end
+                a:Play(0.01,0.01,0.01)
+                func(Hits)                
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end             
+        end
+    end
+end)
+spawn(function()
+    while task.wait() do
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = shared.cpc
+                func(Hits)   
+            end             
+        end
+    end
+end)
+spawn(function()
+    while task.wait() do 
+        pcall(function()
+                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+                    AttackNoCD(0)
+                end
+        end)
+    end
+end)
+b2 = tick()
+spawn(function()
+    while wait(CheckSpeed("Fast")) do
+        if b2 - tick() > 0.5 then
+            wait(0.01)
+            b2 = tick()
+        end
+        pcall(function()
+            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
+                AttackNoCD(0)
+            end
+        end)
+    end
+end)
 
     HttpService = game:GetService("HttpService")
     local i = "Apsara Hub"
@@ -3264,7 +3442,7 @@ ST:AddToggle({
     Flag = "FastAttack",
     Save = false,
     Callback = function(Value)
-        _G.FastAttackNoCD = Value
+        _G.FastSpeed = value
     end    
 })
 local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
@@ -3299,10 +3477,10 @@ spawn(function()
         end
     end)
 end)
-local AttackList = {"Supper Fast Attack", "Very Very Fast Attack", "Fast Attack", "Normal Attack", "Mastery Attack"}
+local AttackList = {"Normal", "Fast"}
 ST:AddDropdown({
 	Name = "Fast Attack Delay",
-	Default = "Supper Fast Attack",
+	Default = "Fast",
 	Options = AttackList,
     Flag = "FastAttack Delay",
     Save = true,
@@ -3314,16 +3492,10 @@ spawn(function()
     while wait(.0001) do
         if _G.FastAttackDelay then
             pcall(function()
-                if _G.FastAttackDelay == "Supper Fast Attack" then
-                    _G.FastAttackDelay = 0
-                elseif _G.FastAttackDelay == "Very Very Fast Attack" then
-                    _G.FastAttackDelay = 0.001
-                elseif _G.FastAttackDelay == "Fast Attack" then
-                    _G.FastAttackDelay = 0.01
-                elseif _G.FastAttackDelay == "Normal Attack" then
-                    _G.FastAttackDelay = 1
-                elseif _G.FastAttackDelay == "Mastery Attack" then
-                    _G.FastAttackDelay = 3
+                if _G.FastAttackDelay == "Normal" then
+                    _G.FastAttackDelay = 0.2
+                elseif _G.FastAttackDelay == "Fast" then
+                    _G.FastAttackDelay = 0.1
                 end
             end)
         end

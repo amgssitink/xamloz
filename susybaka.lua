@@ -1667,50 +1667,218 @@ function TweenTempleLegit()
 		end
     end
 	end)
+	
+local plr = game.Players.LocalPlayer
+local CbFw = debug.getupvalues(require(game.Players.LocalPlayer.PlayerScripts.CombatFramework))
+local CbFw2 = CbFw[2]
 
-getgenv()).Config = {
- ["FastAttack"] = true,
- ["ClickAttack"] = false
-} 
+require(game.ReplicatedStorage.Util.CameraShaker):Stop()
 
-coroutine.wrap(function()
-local StopCamera = require(game.ReplicatedStorage.Util.CameraShaker)StopCamera:Stop()
-    for v,v in pairs(getreg()) do
-        if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework then
-             for v,v in pairs(debug.getupvalues(v)) do
-                if typeof(v) == "table" then
-                    spawn(function()
-                        game:GetService("RunService").RenderStepped:Connect(function()
-                            if getgenv().Config['FastAttack'] then
-                                 pcall(function()
-                                     v.activeController.timeToNextAttack = -(math.huge^math.huge^math.huge)
-                                     v.activeController.attacking = false
-                                     v.activeController.increment = 4
-                                     v.activeController.blocking = false   
-                                     v.activeController.hitboxMagnitude = 150
-    		                         v.activeController.humanoid.AutoRotate = true
-    	                      	     v.activeController.focusStart = 0
-    	                      	     v.activeController.currentAttackTrack = 0
-                                     sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRaxNerous", math.huge)
-                                 end)
-                             end
-                         end)
-                    end)
+function GetBlade() 
+    local p13 = CbFw2.activeController
+    local ret = p13.blades[1]
+    if not ret then 
+        return 
+    end
+    while ret.Parent ~= game.Players.LocalPlayer.Character do 
+        ret = ret.Parent 
+    end
+    return ret
+end
+
+function AttackNoCD(Num)
+    if Num == 1 then
+        local AC = CbFw2.activeController
+        for i = 1,1 do 
+            local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+                plr.Character,
+                {plr.Character.HumanoidRootPart},
+                55
+            )
+            local cac = {}
+            local hash = {}
+            for k, v in pairs(bladehit) do
+                if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                    table.insert(cac, v.Parent.HumanoidRootPart)
+                    hash[v.Parent] = true
                 end
+            end
+            bladehit = cac
+            if #bladehit > 0 then
+                local u8 = debug.getupvalue(AC.attack, 5)
+                local u9 = debug.getupvalue(AC.attack, 6)
+                local u7 = debug.getupvalue(AC.attack, 4)
+                local u10 = debug.getupvalue(AC.attack, 7)
+                local u12 = (u8 * 798405 + u7 * 727595) % u9
+                local u13 = u7 * 798405
+                (function()
+                    u12 = (u12 * u9 + u13) % 1099511627776
+                    u8 = math.floor(u12 / u9)
+                    u7 = u12 - u8 * u9
+                end)()
+                u10 = u10 + 1
+                debug.setupvalue(AC.attack, 5, u8)
+                debug.setupvalue(AC.attack, 6, u9)
+                debug.setupvalue(AC.attack, 4, u7)
+                debug.setupvalue(AC.attack, 7, u10)
+                pcall(function()
+                    if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
+                        AC.animator.anims.basic[1]:Play(0.001,0.001,0.001)
+                        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBlade()))
+                        game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
+                    end
+                end)
+            end
+        end
+    elseif Num == 0 then
+        local AC = CbFw2.activeController
+        for i = 1,1 do 
+            local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+                plr.Character,
+                {plr.Character.HumanoidRootPart},
+                55
+            )
+            local cac = {}
+            local hash = {}
+            for k, v in pairs(bladehit) do
+                if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                    table.insert(cac, v.Parent.HumanoidRootPart)
+                    hash[v.Parent] = true
+                end
+            end
+            bladehit = cac
+            if #bladehit > 0 then
+                pcall(function()
+                    if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
+                        for i,CombatFrameworkR in pairs(CbFw) do
+                            pcall(function()
+                                if i == 2 then
+                                    CombatFrameworkR.activeController.increment = 4
+                                    CombatFrameworkR.activeController.hitboxMagnitude = 55
+                                    CombatFrameworkR.activeController.timeToNextAttack = tick()
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):ClickButton1(Vector2.new(1300,760))
+                                end
+                            end)
+                        end
+                    end
+                end)
             end
         end
     end
-end)();
+end
+
+local STOP = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle)
+local STOPRL = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
+
+if not shared.orl then
+    shared.orl = STOPRL.wrapAttackAnimationAsync
+end
+
+if not shared.cpc then
+    shared.cpc = STOP.play 
+end
 
 spawn(function()
-    game:GetService("RunService").RenderStepped:Connect(function()
-        if getgenv().Config['ClickAttack'] then
-             pcall(function()
-                game:GetService'VirtualUser':CaptureController()
-			    game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,0,1))
-            end)
+    while task.wait() do
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = function() end
+                a:Play(15.25,15.25,15.25)
+                func(Hits)                
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end         
+            if Hits then
+                STOP.play = function() end
+                a:Play(15.25,15.25,15.25)
+                func(Hits)
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end      
         end
-    end)
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = function() end
+                a:Play(15.25,15.25,15.25)
+                func(Hits)                
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end         
+            if Hits then
+                STOP.play = function() end
+                a:Play(15.25,15.25,15.25)
+                func(Hits)
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end      
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = function() end
+                a:Play(0.01,0.01,0.01)
+                func(Hits)                
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end             
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = shared.cpc
+                func(Hits)   
+            end             
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait() do 
+        pcall(function()
+            if true or false then
+                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+                    AttackNoCD(0)
+                end
+            end
+        end)
+    end
+end)
+
+b2 = tick()
+spawn(function()
+    while wait(0.1) do
+        if b2 - tick() > 0.5 then
+            wait(0.01)
+            b2 = tick()
+        end
+        pcall(function()
+            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
+                AttackNoCD(0)
+            end
+        end)
+    end
 end)
 
     HttpService = game:GetService("HttpService")
@@ -3210,40 +3378,32 @@ ST:AddToggle({
     Flag = "FastAttack",
     Save = false,
     Callback = function(Value)
-        _G.FastSpeed = value
+        _G.FastAttack = value
     end    
 })
-local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
-CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
-y = debug.getupvalues(CombatFrameworkR)[2]
+local Module = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+
+local CombatFramework = debug.getupvalues(Module)[2]
+
+local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
+
 spawn(function()
-    game:GetService("RunService").RenderStepped:Connect(function()
+    while true do
         if _G.FastAttack then
-            if typeof(y) == "table" then
-                pcall(function()
-                    CameraShaker:Stop()
-                    y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
-                    y.activeController.timeToNextAttack = 0
-                    y.activeController.hitboxMagnitude = 60
-                    y.activeController.active = false
-                    y.activeController.timeToNextBlock = 0
-                    y.activeController.focusStart = 1655503339.0980349
-                    y.activeController.increment = 1
-                    y.activeController.blocking = false
-                    y.activeController.attacking = false
-                    y.activeController.humanoid.AutoRotate = true
-                end)
-            end
+            pcall(function()
+                CameraShakerR:Stop()
+                CombatFramework.activeController.attacking = false
+                CombatFramework.activeController.timeToNextAttack = 0
+                CombatFramework.activeController.increment = 3
+                CombatFramework.activeController.hitboxMagnitude = 100
+                CombatFramework.activeController.blocking = false
+                CombatFramework.activeController.timeToNextBlock = 0
+                CombatFramework.activeController.focusStart = 0
+                CombatFramework.activeController.humanoid.AutoRotate = true
+            end)
         end
-    end)
-end)
-spawn(function()
-    game:GetService("RunService").RenderStepped:Connect(function()
-        if _G.FastAttack == true then
-            game.Players.LocalPlayer.Character.Stun.Value = 0
-            game.Players.LocalPlayer.Character.Busy.Value = false        
-        end
-    end)
+        task.wait()
+    end
 end)
 local AttackList = {"Normal", "Fast"}
 ST:AddDropdown({

@@ -19,7 +19,7 @@ spawn(function()
             game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge, math.huge * math.huge * 1 / 0 * 1 / 0 * 1 / 0 * 1 / 0 * 1 / 0
         end
     end
-end)]]
+end)
 spawn(function()
 	game:GetService("RunService").Stepped:Connect(function()
 		pcall(function()
@@ -54,8 +54,7 @@ spawn(function()
                     yedhee.activeController.focusStart = 0
                     if yedhee.activeController:attack() then
                         yedhee.activeController:attack()
-                    end
-                    ]]
+                    end                   
                 end
 			end
 		end)

@@ -1769,117 +1769,47 @@ function AttackNoCD(Num)
     end
 end
 
-local STOP = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle)
-local STOPRL = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
-
-if not shared.orl then
-    shared.orl = STOPRL.wrapAttackAnimationAsync
-end
-
-if not shared.cpc then
-    shared.cpc = STOP.play 
-end
-
 spawn(function()
-    while task.wait() do
-        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-            local Hits = STOPRL.getBladeHits(b,c,d)
-            if Hits then
-                STOP.play = function() end
-                a:Play(15.25,15.25,15.25)
-                func(Hits)                
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end         
-            if Hits then
-                STOP.play = function() end
-                a:Play(15.25,15.25,15.25)
-                func(Hits)
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end      
-        end
-        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-            local Hits = STOPRL.getBladeHits(b,c,d)
-            if Hits then
-                STOP.play = function() end
-                a:Play(15.25,15.25,15.25)
-                func(Hits)                
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end         
-            if Hits then
-                STOP.play = function() end
-                a:Play(15.25,15.25,15.25)
-                func(Hits)
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end      
-        end
-    end
-end)
-
-spawn(function()
-    while task.wait() do
-        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-            local Hits = STOPRL.getBladeHits(b,c,d)
-            if Hits then
-                STOP.play = function() end
-                a:Play(0.01,0.01,0.01)
-                func(Hits)                
-                STOP.play = shared.cpc
-                wait(0.5)
-                a:Stop()
-            end             
-        end
-    end
-end)
-
-spawn(function()
-    while task.wait() do
-        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
-            local Hits = STOPRL.getBladeHits(b,c,d)
-            if Hits then
-                STOP.play = shared.cpc
-                func(Hits)   
-            end             
-        end
-    end
-end)
-
-spawn(function()
-    while task.wait() do 
-        pcall(function()
-            if true or false then
-                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
-                    AttackNoCD(0)
+	game:GetService("RunService").Stepped:Connect(function()
+		pcall(function()
+			local yedkuy112 = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.CameraShaker)
+			local VirtualUser = game:GetService('VirtualUser')
+			local yedhee = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+            yedkuy112.CameraShakeInstance.CameraShakeState.Inactive = 0
+            yedhee.activeController.hitboxMagnitude = 55
+			if _G.FastAttack then
+                if startATkmOb and (_G.AutoFarm or _G.autoSea2 or _G.autoSea3 or _G.BuddySword or raidiing) then
+                    if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") then
+                        yedhee.activeController.timeToNextAttack = 3
+                    else
+                        yedhee.activeController.timeToNextAttack = -(math.huge^math.huge)
+                    end
+                    yedhee.activeController.attacking = false
+                    yedhee.activeController.increment = 3
+                    if yedhee.activeController:attack() then
+                        yedhee.activeController:attack()
+                    end
+                    yedhee.activeController.blocking = false
+                    yedhee.activeController.timeToNextBlock = 0
+                    game.Players.LocalPlayer.Character.Stun.Value = 0
+                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                    yedhee.activeController.timeToNextAttack = 0
+                    yedhee.activeController.attacking = false
+                    yedhee.activeController.blocking = false
+                    yedhee.activeController.timeToNextAttack = 0
+                    yedhee.activeController.timeToNextBlock = 0
+                    yedhee.activeController.increment = 3
+                    yedhee.activeController.hitboxMagnitude = 55
+                    yedhee.activeController.focusStart = 0
+                    if yedhee.activeController:attack() then
+                        yedhee.activeController:attack()
+                    end
+                    ]]
                 end
-            end
-        end)
-    end
-end)
-
-b2 = tick()
-spawn(function()
-    while wait(0.1) do
-        if b2 - tick() > 0.5 then
-            wait(0.01)
-            b2 = tick()
-        end
-        pcall(function()
-            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
-                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-                end
-                AttackNoCD(0)
-            end
-        end)
-    end
-end)
+			end
+		end)
+	end)
+end))
 
     HttpService = game:GetService("HttpService")
     local i = "Apsara Hub"
@@ -3378,33 +3308,13 @@ ST:AddToggle({
     Flag = "FastAttack",
     Save = false,
     Callback = function(Value)
-        _G.FastAttack = value
+        _G.FastAttack = state
     end    
 })
-local Module = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+local yedkuy112 = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.CameraShaker)
+local VirtualUser = game:GetService('VirtualUser')
+local yedhee = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
 
-local CombatFramework = debug.getupvalues(Module)[2]
-
-local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
-
-spawn(function()
-    while true do
-        if _G.FastAttack then
-            pcall(function()
-                CameraShakerR:Stop()
-                CombatFramework.activeController.attacking = false
-                CombatFramework.activeController.timeToNextAttack = 0
-                CombatFramework.activeController.increment = 3
-                CombatFramework.activeController.hitboxMagnitude = 100
-                CombatFramework.activeController.blocking = false
-                CombatFramework.activeController.timeToNextBlock = 0
-                CombatFramework.activeController.focusStart = 0
-                CombatFramework.activeController.humanoid.AutoRotate = true
-            end)
-        end
-        task.wait()
-    end
-end)
 local AttackList = {"Normal", "Fast"}
 ST:AddDropdown({
 	Name = "Fast Attack Delay",

@@ -19,7 +19,7 @@ spawn(function()
                 CameraShakerR:Stop()
                 CombatFramework.activeController.attacking = false
                 CombatFramework.activeController.timeToNextAttack = -(math.huge^math.huge^math.huge)
-                CombatFramework.activeController.increment = 3
+                CombatFramework.activeController.increment = 0
                 CombatFramework.activeController.hitboxMagnitude = 9999
                 CombatFramework.activeController.blocking = false
                 CombatFramework.activeController.timeToNextBlock = 0
@@ -144,8 +144,8 @@ b = tick()
 spawn(function()
 	while wait(0) do
 		if  _G.FastAttack then
-			if b - tick() > 0.75 then
-				wait(0.059)
+			if b - tick() > 0.99 then
+				wait(0.001)
 				b = tick()
 			end
 			pcall(function()
@@ -167,8 +167,8 @@ k = tick()
 spawn(function()
 	while wait(0) do
 		if  _G.FastAttack then
-			if k - tick() > 0.75 then
-				wait(0.059)
+			if k - tick() > 0.99 then
+				wait(0.001)
 				k = tick()
 			end
 			pcall(function()

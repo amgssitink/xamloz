@@ -4698,8 +4698,6 @@ function t.CreateMain(H)
     return dj
 end
 return t end
-print("\nTai sao Vo Hoang lai nang den muc vay\nWhy Vo Hoang can be that tard")
-print("Sucvat123")
 local rnd = tostring(math.random(1,100000))
 local Library = GetUi()
 

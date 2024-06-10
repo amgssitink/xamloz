@@ -4085,11 +4085,11 @@ Section1:CreateToggle("Toggle Example", {Toggled=false , Description = false}, f
    print(Value)
 end)
 
-Section1:CreateButton("Button Example", function ()
+Section1:CreateButton("Button Example", function(V)
    print("Button Cliked!")
 end)
 
-Section1:CreateTextbox("TextBox", false, function (vv)
+Section1:CreateTextbox("TextBox", false, function(v)
    print(vv)
 end)
 
@@ -4099,11 +4099,11 @@ Section1:CreateDropdown("Dropdown ", {
        print(value)
 end)
 
-Section1:CreateColorPicker("Color Picker", Color3.fromRGB(255, 255, 255), function ()
+Section1:CreateColorPicker("Color Picker", Color3.fromRGB(255, 255, 255), function()
    print("fsf")
 end)
 
-Section1:CreateButton("Refresh Example", function ()
+Section1:CreateButton("Refresh Example", function(Value)
    local newlist = {"resf", "uwua", "fsk"}
    dropdown:Clear()
    wait(1)

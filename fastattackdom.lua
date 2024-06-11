@@ -145,7 +145,7 @@ spawn(function()
 	while wait(0) do
 		if  _G.FastAttack then
 			if b - tick() > 0.01 then
-				wait(0.001)
+				wait(0.999)
 				b = tick()
 			end
 			pcall(function()
@@ -168,7 +168,7 @@ spawn(function()
 	while wait(0) do
 		if  _G.FastAttack then
 			if k - tick() > 0.01 then
-				wait(0.001)
+				wait(0.999)
 				k = tick()
 			end
 			pcall(function()

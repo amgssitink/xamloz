@@ -612,8 +612,8 @@ MainFrame.Parent = MainGui
 UICorner.CornerRadius = UDim.new(0, 5)
 UICorner.Parent = MainFrame
 
-Background.Image = "rbxassetid://16968132570"
-Background.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Background.Image = "rbxassetid://117424951253"
+Background.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
 Background.BackgroundTransparency = 0.9990000128746033
 Background.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Background.BorderSizePixel = 0
@@ -624,7 +624,7 @@ Background.Parent = MainFrame
 UICorner1.CornerRadius = UDim.new(0, 5)
 UICorner1.Parent = Background
 
-Character.Image = "rbxassetid://16951411241"
+Character.Image = "rbxassetid://"
 Character.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Character.BackgroundTransparency = 0.9990000128746033
 Character.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -636,7 +636,7 @@ Character.Parent = MainFrame
 
 TextLabel.Font = Enum.Font.GrenzeGotisch
 TextLabel.Text = "Apsara Hub Auto Bounty"
-TextLabel.TextColor3 = Color3.fromRGB(228.0000016093254, 255, 207.00000286102295)
+TextLabel.TextColor3 = Color3.fromRGB(240, 255, 255)
 TextLabel.TextSize = 51
 TextLabel.TextTransparency = 0.800000011920929
 TextLabel.TextXAlignment = Enum.TextXAlignment.Left

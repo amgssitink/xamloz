@@ -3568,7 +3568,7 @@ ST:AddToggle({
     Default = true,
     Flag = "FastAttack",
     Save = false,
-    Callback = function(Value)
+    Callback = function(state)
         _G.FastAttack = state
     end    
 })
@@ -3622,6 +3622,18 @@ spawn(function()
                 end
 			end
 		end)
+	end)
+end)
+game:GetService("RunService").Heartbeat:connect(function()
+	pcall(function()
+        if  _G.autoSea2 or _G.autoSea3 or _G.BuddySword then --_G.AutoFarm or
+            if startATkmOb then
+                local yedhee = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+                yedhee.activeController.hitboxMagnitude = 55
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end
+        end
 	end)
 end)
 local AttackList = {"Supper Fast Attack", "Very Very Fast Attack", "Fast Attack", "Normal Attack", "Mastery Attack"}

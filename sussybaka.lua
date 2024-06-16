@@ -3572,7 +3572,7 @@ ST:AddToggle({
         _G.FastAttack = Value
     end    
 })
-locallocal Module = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+local Module = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
 local CombatFramework = debug.getupvalues(Module)[2]
 local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
 

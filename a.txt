@@ -3221,11 +3221,10 @@ ST:AddToggle({
     Default = true,
     Flag = "FastAttack",
     Save = false,
-    Callback = function(Value)
+    Callback = function(t)
         _G.FastAttack = Value
     end    
 })
-
 local Module = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
 local CombatFramework = debug.getupvalues(Module)[2]
 local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)

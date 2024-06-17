@@ -20,7 +20,7 @@ elseif game.PlaceId == 4442272183 then
 elseif game.PlaceId == 7449423635 then
     World3 = true
 else
-    game:GetService("Players").LocalPlayer:Kick("Do not Support")
+    game:GetService("Players").LocalPlayer:Kick("Do not support this game")
 end
 function CheckQuest() 
     MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
@@ -1697,7 +1697,7 @@ function AttackHit()
         bladehit = cac
         if #bladehit > 0 then
             pcall(function()
-                CmrFwLib.activeController.timeToNextAttack = 9999
+                CmrFwLib.activeController.timeToNextAttack = 1
                 CmrFwLib.activeController.attacking = false
                 CmrFwLib.activeController.blocking = false
                 CmrFwLib.activeController.timeToNextBlock = 0
